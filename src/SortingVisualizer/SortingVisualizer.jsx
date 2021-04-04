@@ -4,18 +4,13 @@ import { getBubbleSortAnimation } from '../SortingAlgorithms/SortingAlgorithms.j
 import { getMergeSortAnimation } from '../SortingAlgorithms/SortingAlgorithms.jsx';
 
 /* TODO:
-
-1. sorting time
-2. reset to origin array
-3. Change algorithms into drop-down list
-4. create setting drop-down list - set length, set speed.
-5. interrupt - stop, step, continue
-
+* interrupt - stop, step, continue
+* Quick sort
 */
 
 // Array Setting
 const DEFAULT_LENGTH = 20;
-const LIMIT_LENGTH = 300;
+const LIMIT_LENGTH = 150;
 const ARRAY_SCALE = 12;
 const RAND_MIN = 5;
 const RAND_MAX = 400;
@@ -58,7 +53,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     mergeSort(){
-        // let timestamp = Date.now();
+        const timestamp = Date.now();
         const animations = getMergeSortAnimation(this.state.array)
 
         for (let i = 0; i < animations.length; i++) {
@@ -85,14 +80,14 @@ export default class SortingVisualizer extends React.Component {
             }, i * this.state.speed);
         }
 
-        // setTimeout(() => {
-        //     timestamp = Date.now() - timestamp
-        //     this.setState({time_complexity: {timestamp}})
-        // }, animations.length * this.state.speed);
+        setTimeout(() => {
+            this.setState({time_complexity: (Date.now() - timestamp) / 1000})
+        }, animations.length * this.state.speed);
     }
 
     bubbleSort(){
         const animations = getBubbleSortAnimation(this.state.array)
+        const timestamp = Date.now()
 
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
@@ -120,6 +115,9 @@ export default class SortingVisualizer extends React.Component {
 
             }
         }
+        setTimeout(() => {
+            this.setState({time_complexity: (Date.now() - timestamp) / 1000})
+        }, animations.length * this.state.speed);
     }
 
     quickSort(){}
@@ -129,7 +127,7 @@ export default class SortingVisualizer extends React.Component {
         for (let i = 0; i < this.state.length; i++) {
             array.push(randomNum(RAND_MIN, RAND_MAX));
         }
-        this.setState({array: array, copy_array: [...array]});
+        this.setState({array: array, copy_array: [...array], time_complexity: 0,});
         this.resetColor();
     }
 
@@ -138,7 +136,7 @@ export default class SortingVisualizer extends React.Component {
         for (let i = 0; i < arrayBars.length; i++) {
             arrayBars[i].style.height = `${this.state.copy_array[i]/ARRAY_SCALE}vw`;
         }
-        this.setState({array: [...this.state.copy_array]})
+        this.setState({array: [...this.state.copy_array], time_complexity: 0,})
         this.resetColor();
     }
 
@@ -188,7 +186,7 @@ export default class SortingVisualizer extends React.Component {
                     </div>
                     <div className="algo-container">
                         <div className="dropdown">
-                            <button className="btn text">Algorithms</button>
+                            <button className="btn text">Algorithms &#x25BE;</button>
                             <div className="dropdown-content">
                                 <button className="btn-dropdown text-dropdown" onClick={() => this.bubbleSort()}>Bubble Sort</button>
                                 <button className="btn-dropdown text-dropdown" onClick={() => this.mergeSort()}>Merge Sort</button>
@@ -198,7 +196,7 @@ export default class SortingVisualizer extends React.Component {
                     </div>
                     <div className="setting-container">
                         <div className="dropdown">
-                            <button className="btn text">Setting</button>
+                            <button className="btn text">Setting &#x25BE;</button>
                             <div className="dropdown-content">
                                 <form className="setting-form" onSubmit={this.handleSubmit}>
                                     <input style={styles.input_style} type="text" value={this.state.length} onChange={this.handleLength}/>
@@ -225,8 +223,7 @@ export default class SortingVisualizer extends React.Component {
                     ))}
                 </div>
                 <div className="result-container text">
-                    <h2>Time: {this.state.time_complexity}ms</h2>
-                    Result Container Placeholder
+                    <h2>Time: {this.state.time_complexity}s</h2>
                 </div>
             </div>
         );

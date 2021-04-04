@@ -104,5 +104,6 @@
 
 .result-container {
     background-color: #ff6e40;
-    height: 7vw;
+    height: 5vw;
+    text-align: center;
 }

@@ -1,3 +1,13 @@
+# Sorting Visualizer
+A visualization for various sorting algorithms like bubble sort, merge sort.<br>
+Access it using this link https://hongfu12321.github.io/Sorting-Visualizer/.
+![](Demo.gif)
+
+## To-Do Lists
+- Interruption - stop, step, continue
+- Implement Quick sort
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
