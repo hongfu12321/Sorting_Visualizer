@@ -18,9 +18,10 @@
 
 .dropdown {
     flex: 1;
-    text-align: top;
-    padding: 0px;
-    vertical-align: top;
+    text-align:center;
+    top: 40%;
+    z-index: 2;
+
 }
 
 .dropdown:hover .dropdown-content {
@@ -32,7 +33,6 @@
     display: none;
     background-color: blanchedalmond;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
     text-align: left;
     width: 90%;
     margin: auto;
@@ -42,6 +42,7 @@
     background-color: blanchedalmond;
     border: 0px;
     color:cadetblue;
+
 }
 
 .text-dropdown {
@@ -49,6 +50,7 @@
     color: cadetblue;
     font-style: Helvetica;
     font-weight: bold;
+    
 }
 
 .logo {
@@ -59,33 +61,13 @@
 
 .generate-array-container {
     flex: 2;
-    padding: 1vw;
     vertical-align: middle;
-    display: flex;
-}
-
-.setting-container {
-    flex: 1;
-    padding: 1vw;
-    /* vertical-align: middle; */
-    display: flex;
-}
-
-.setting-form {
-    margin-left:2vw;
-}
-
-.algo-container {
-    flex: 1;
-    padding: 1vw;
-    /* vertical-align: middle; */
     display: flex;
 }
 
 .btn {
     border: 0px;
-    margin-top: 0vw;
-    margin-right: 1vw;
+    text-align: top;
     background-color: #1e3d59;
 }
 
