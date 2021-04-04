@@ -1,0 +1,108 @@
+.text {
+    font-size: 1.7vw;
+    color: #f5f0e1;
+    font-style: Helvetica;
+    font-weight: bold;
+}
+
+.nav-bar {
+    display: flex;
+    background-color: #1e3d59;
+    height: 4vw;
+    font-style: Helvetica;
+}
+
+.flex-comp {
+    flex: 1;
+}
+
+.dropdown {
+    flex: 1;
+    text-align: top;
+    padding: 0px;
+    vertical-align: top;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+
+}
+
+.dropdown-content {
+    display: none;
+    background-color: blanchedalmond;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    text-align: left;
+    width: 90%;
+    margin: auto;
+}
+
+.btn-dropdown {
+    background-color: blanchedalmond;
+    border: 0px;
+    color:cadetblue;
+}
+
+.text-dropdown {
+    font-size: 1.3vw;
+    color: cadetblue;
+    font-style: Helvetica;
+    font-weight: bold;
+}
+
+.logo {
+    flex: 2;
+    text-align: center;
+    padding: 1vw;
+}
+
+.generate-array-container {
+    flex: 2;
+    padding: 1vw;
+    vertical-align: middle;
+    display: flex;
+}
+
+.setting-container {
+    flex: 1;
+    padding: 1vw;
+    /* vertical-align: middle; */
+    display: flex;
+}
+
+.setting-form {
+    margin-left:2vw;
+}
+
+.algo-container {
+    flex: 1;
+    padding: 1vw;
+    /* vertical-align: middle; */
+    display: flex;
+}
+
+.btn {
+    border: 0px;
+    margin-top: 0vw;
+    margin-right: 1vw;
+    background-color: #1e3d59;
+}
+
+.array-container {
+    display: flex;
+    align-items: flex-end;
+    margin: 5vw;
+    height: 33vw;
+}
+
+.array-bar {
+    flex: 1; 
+    margin: 0 1px;
+    display: inline-block;
+}
+
+.result-container {
+    background-color: #ff6e40;
+    height: 7vw;
+}
