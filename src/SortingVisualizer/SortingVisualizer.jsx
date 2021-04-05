@@ -222,25 +222,29 @@ export default class SortingVisualizer extends React.Component {
                         <button className="flex-comp btn text" onClick={() => this.generateNewArray()}>New Array</button>
                         <button className="flex-comp btn text" onClick={() => this.resetArray()}>Reset Array</button>
                     </div>
-                    <div className="dropdown">
-                        <button className="btn text">Algorithms &#x25BE;</button>
-                        <div className="dropdown-content">
-                            <button className="btn-dropdown text-dropdown" onClick={() => this.bubbleSort()}>Bubble Sort</button>
-                            <button className="btn-dropdown text-dropdown" onClick={() => this.mergeSort()}>Merge Sort</button>
-                            <button className="btn-dropdown text-dropdown" onClick={() => this.quickSort()}>Quick Sort</button>
+                    <div className="div-container">
+                        <div className="dropdown">
+                            <button className="btn text">Algorithms &#x25BE;</button>
+                            <div className="dropdown-content">
+                                <button className="btn-dropdown text-dropdown" onClick={() => this.bubbleSort()}>Bubble Sort</button>
+                                <button className="btn-dropdown text-dropdown" onClick={() => this.mergeSort()}>Merge Sort</button>
+                                <button className="btn-dropdown text-dropdown" onClick={() => this.quickSort()}>Quick Sort</button>
+                            </div>
                         </div>
                     </div>
-                    <div className="dropdown">
-                        <button className="btn text">Setting &#x25BE;</button>
-                        <div className="dropdown-content">
-                            <form className="setting-form" onSubmit={this.handleSubmit}>
-                                <input style={styles.input_style} type="text" value={this.state.length} onChange={this.handleLength}/>
-                                <input className="btn-dropdown text-dropdown" type="submit" value="Set Length"/>
-                            </form>
-                            <form className="setting-form" onSubmit={this.handleSubmit}>
-                                <input style={styles.input_style} type="text" value={this.state.speed} onChange={this.handleSpeed}/>
-                                <input className="btn-dropdown text-dropdown" type="submit" value="Set Speed"/>
-                            </form>
+                    <div className="div-container">
+                        <div className="dropdown">
+                            <button className="btn text">Setting &#x25BE;</button>
+                            <div className="dropdown-content">
+                                <form className="setting-form" onSubmit={this.handleSubmit}>
+                                    <input style={styles.input_style} type="text" value={this.state.length} onChange={this.handleLength}/>
+                                    <input className="btn-dropdown text-dropdown" type="submit" value="Set Length"/>
+                                </form>
+                                <form className="setting-form" onSubmit={this.handleSubmit}>
+                                    <input style={styles.input_style} type="text" value={this.state.speed} onChange={this.handleSpeed}/>
+                                    <input className="btn-dropdown text-dropdown" type="submit" value="Set Speed"/>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
