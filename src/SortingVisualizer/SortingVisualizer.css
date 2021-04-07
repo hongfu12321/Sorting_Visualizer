@@ -17,8 +17,16 @@
     flex: 1;
 }
 
+.div-container {
+    flex: 1;
+    
+    display: flex;
+    align-items: center;
+}
+
 .dropdown {
     position: absolute;
+    margin: auto;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -70,15 +78,9 @@
     display: flex;
 }
 
-.div-container {
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
 .setting-form {
     margin-left:2vw;
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 .btn {
