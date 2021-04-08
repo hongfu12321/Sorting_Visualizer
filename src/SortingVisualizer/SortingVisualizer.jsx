@@ -11,12 +11,12 @@ import { getQuickSortAnimation } from '../SortingAlgorithms/SortingAlgorithms.js
 /*
 ** Array Setting
 */
-const DEFAULT_LENGTH = 20;
+const DEFAULT_LENGTH = 30;
 const LIMIT_LENGTH = 150;
 const ARRAY_SCALE = 12;
 const RAND_MIN = 5;
 const RAND_MAX = 400;
-const DEFAULT_SPEED = 10;
+const DEFAULT_SPEED = 15;
 
 /*
 ** Collor Setting
@@ -50,6 +50,7 @@ export default class SortingVisualizer extends React.Component {
             length: DEFAULT_LENGTH,
             speed: DEFAULT_SPEED,
             time_complexity: 0,
+            timeoutId: -1,
         };
         
         this.handleLength = this.handleLength.bind(this);
@@ -67,14 +68,14 @@ export default class SortingVisualizer extends React.Component {
 
     mergeSort(){
         const timestamp = Date.now();
-        const animations = getMergeSortAnimation(this.state.array)
+        const animations = getMergeSortAnimation(this.state.array.slice(0));
+        let timeoutId;
 
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const [idx, val, startIdx, endIdx, status] = animations[i];
 
-
-            setTimeout(() => {
+            timeoutId = setTimeout(() => {
                 if (status === SHOW_BOUNDARY) {
                     const start_style = arrayBars[startIdx].style;
                     const end_style = arrayBars[endIdx].style;
@@ -92,21 +93,23 @@ export default class SortingVisualizer extends React.Component {
                 }
             }, i * this.state.speed);
         }
-
+        this.setState({timeoutId: timeoutId});
+        
         setTimeout(() => {
             this.setState({time_complexity: (Date.now() - timestamp) / 1000})
         }, animations.length * this.state.speed);
     }
 
     bubbleSort(){
-        const animations = getBubbleSortAnimation(this.state.array)
-        const timestamp = Date.now()
+        const animations = getBubbleSortAnimation(this.state.array.slice(0));
+        const timestamp = Date.now();
+        let timeoutId;
 
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const [barOneIdx, barTwoIdx, oneVal, twoVal, finish] = animations[i];
 
-            setTimeout(() => {
+            timeoutId = setTimeout(() => {
                 if (finish === 1) {
                     const barOneStyle = arrayBars[barOneIdx].style;
                     barOneStyle.backgroundColor = CONFIRM_COLOR;
@@ -125,20 +128,22 @@ export default class SortingVisualizer extends React.Component {
                 }
             }, i * this.state.speed);
         }
+        this.setState({timeoutId: timeoutId});
         setTimeout(() => {
             this.setState({time_complexity: (Date.now() - timestamp) / 1000})
         }, animations.length * this.state.speed);
     }
 
     quickSort(){
-        const animations = getQuickSortAnimation(this.state.array)
-        const timestamp = Date.now()
+        const animations = getQuickSortAnimation(this.state.array.slice(0));
+        const timestamp = Date.now();
+        let timeoutId;
         
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const [srcIdx, srcVal, desIdx, desVal, status] = animations[i];
 
-            setTimeout(() => {
+            timeoutId = setTimeout(() => {
                 if (status === PIVOT) {
                     arrayBars[srcIdx].style.backgroundColor = SECONDARY_COLOR;
                 }
@@ -155,30 +160,42 @@ export default class SortingVisualizer extends React.Component {
                 }
             }, i * this.state.speed);
         }
+        this.setState({timeoutId: timeoutId});
         setTimeout(() => {
             this.setState({time_complexity: (Date.now() - timestamp) / 1000})
         }, animations.length * this.state.speed);
     }
 
     generateNewArray() {
+        this.resetStatus();
         const array = []
+
         for (let i = 0; i < this.state.length; i++) {
             array.push(randomNum(RAND_MIN, RAND_MAX));
         }
         this.setState({array: array, copy_array: [...array], time_complexity: 0,});
-        this.resetColor();
     }
 
     resetArray() {
+        this.resetStatus();
         const arrayBars = document.getElementsByClassName('array-bar');
+        
         for (let i = 0; i < arrayBars.length; i++) {
             arrayBars[i].style.height = `${this.state.copy_array[i]/ARRAY_SCALE}vw`;
         }
         this.setState({array: [...this.state.copy_array], time_complexity: 0,})
-        this.resetColor();
     }
 
-    resetColor() {
+    resetStatus() {
+        // Clear running animations
+        if (this.state.timeoutId !== -1) {
+            const timeoutId = this.state.timeoutId;
+            for (let i = timeoutId; i >= 0; i--) {
+                clearTimeout(timeoutId - i);
+            }
+        }
+
+        // reset color
         const arrayBars = document.getElementsByClassName('array-bar');
         for (let i = 0; i < arrayBars.length; i++) {
             arrayBars[i].style.backgroundColor = ORIGINAL_COLOR;
