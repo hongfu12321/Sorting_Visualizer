@@ -3,8 +3,15 @@ A visualization for various sorting algorithms like bubble sort, merge sort, qui
 Access it using this link https://hongfu12321.github.io/Sorting-Visualizer/.
 ![](Demo.gif)
 
+## Descriptions
+-  Deployed the React-App through Github-pages to help people learning sorting algorithms easily.
+- Developed the web application in React Javascript framework.
+- Implemented sorting algorithms to sort random integer arrays and present it in animations.
+
+
 ## To-Do Lists
 - Interruption - stop, step, continue
+- If we click button when sorting animation
 
 
 
