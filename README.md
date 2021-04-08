@@ -11,7 +11,7 @@ Access it using this link https://hongfu12321.github.io/Sorting-Visualizer/.
 
 ## To-Do Lists
 - Interruption - stop, step, continue
-- If we click button when sorting animation
+- When sorting animation continue, we should not have access to click other sorting algorithms, and the animation should stop when we click reset array or new array.
 
 #
 
