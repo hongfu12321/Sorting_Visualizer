@@ -1,5 +1,6 @@
 import React from 'react';
 import './SortingVisualizer.css';
+import { Description } from './discription.jsx';
 import { getBubbleSortAnimation } from '../SortingAlgorithms/SortingAlgorithms.jsx';
 import { getMergeSortAnimation } from '../SortingAlgorithms/SortingAlgorithms.jsx';
 import { getQuickSortAnimation } from '../SortingAlgorithms/SortingAlgorithms.jsx';
@@ -39,6 +40,13 @@ const PIVOT = 0;
 const PARTITION = 1;
 const MIDDLE = 2
 
+/*
+** Algorithm type
+*/
+const NONE = 0;
+const BUBBLE = 1;
+const MERGE = 2;
+const QUICK = 3;
 
 export default class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -51,6 +59,7 @@ export default class SortingVisualizer extends React.Component {
             speed: DEFAULT_SPEED,
             time_complexity: 0,
             timeoutId: -1,
+            algo_type: NONE,
         };
         
         this.handleLength = this.handleLength.bind(this);
@@ -67,6 +76,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     mergeSort(){
+        this.resetArray();
         const timestamp = Date.now();
         const animations = getMergeSortAnimation(this.state.array.slice(0));
         let timeoutId;
@@ -93,7 +103,7 @@ export default class SortingVisualizer extends React.Component {
                 }
             }, i * this.state.speed);
         }
-        this.setState({timeoutId: timeoutId});
+        this.setState({timeoutId: timeoutId, algo_type: MERGE});
         
         setTimeout(() => {
             this.setState({time_complexity: (Date.now() - timestamp) / 1000})
@@ -101,6 +111,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     bubbleSort(){
+        this.resetArray();
         const animations = getBubbleSortAnimation(this.state.array.slice(0));
         const timestamp = Date.now();
         let timeoutId;
@@ -128,13 +139,14 @@ export default class SortingVisualizer extends React.Component {
                 }
             }, i * this.state.speed);
         }
-        this.setState({timeoutId: timeoutId});
+        this.setState({timeoutId: timeoutId, algo_type: BUBBLE});
         setTimeout(() => {
             this.setState({time_complexity: (Date.now() - timestamp) / 1000})
         }, animations.length * this.state.speed);
     }
 
     quickSort(){
+        this.resetArray();
         const animations = getQuickSortAnimation(this.state.array.slice(0));
         const timestamp = Date.now();
         let timeoutId;
@@ -160,7 +172,7 @@ export default class SortingVisualizer extends React.Component {
                 }
             }, i * this.state.speed);
         }
-        this.setState({timeoutId: timeoutId});
+        this.setState({timeoutId: timeoutId, algo_type: QUICK});
         setTimeout(() => {
             this.setState({time_complexity: (Date.now() - timestamp) / 1000})
         }, animations.length * this.state.speed);
@@ -173,7 +185,7 @@ export default class SortingVisualizer extends React.Component {
         for (let i = 0; i < this.state.length; i++) {
             array.push(randomNum(RAND_MIN, RAND_MAX));
         }
-        this.setState({array: array, copy_array: [...array], time_complexity: 0,});
+        this.setState({array: array, copy_array: [...array], time_complexity: 0, algo_type: NONE,});
     }
 
     resetArray() {
@@ -183,7 +195,7 @@ export default class SortingVisualizer extends React.Component {
         for (let i = 0; i < arrayBars.length; i++) {
             arrayBars[i].style.height = `${this.state.copy_array[i]/ARRAY_SCALE}vw`;
         }
-        this.setState({array: [...this.state.copy_array], time_complexity: 0,})
+        this.setState({array: [...this.state.copy_array], time_complexity: 0, algo_type: NONE,});
     }
 
     resetStatus() {
@@ -278,7 +290,14 @@ export default class SortingVisualizer extends React.Component {
                     ))}
                 </div>
                 <div className="result-container text">
-                    <h2>Time: {this.state.time_complexity}s</h2>
+                    <div className="discription-container">
+                        <Description 
+                            algo_type={this.state.algo_type}
+                        />
+                    </div>
+                    <div className="runtime-container">
+                        <h2>Run Time: {this.state.time_complexity}s</h2>
+                    </div>
                 </div>
             </div>
         );

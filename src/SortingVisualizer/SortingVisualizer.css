@@ -92,7 +92,7 @@
     display: flex;
     align-items: flex-end;
     margin: 5vw;
-    height: 33vw;
+    height: 30vw;
 }
 
 .array-bar {
@@ -102,7 +102,20 @@
 }
 
 .result-container {
+    display: flex;
     background-color: #ff6e40;
-    height: 5vw;
+    height: 20vw;
     text-align: center;
+}
+
+.discription-container {
+    flex: 2;
+}
+
+.runtime-container {
+    flex: 1;
+}
+
+p {
+    text-align: left;
 }
