@@ -1,6 +1,6 @@
 # Sorting Visualizer
 A visualization for various sorting algorithms like bubble sort, merge sort, quick sort.<br>
-Access it using this link https://hongfu12321.github.io/Sorting-Visualizer/.
+Access it using this link https://hongfu12321.github.io/Sorting_Visualizer/ .
 ![](Demo.gif)
 
 ## Descriptions
